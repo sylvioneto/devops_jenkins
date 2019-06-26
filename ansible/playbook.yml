@@ -10,7 +10,6 @@
       docker_container:
         name: myjenkins
         image: "jenkins/jenkins:lts"
-        recreate: yes
         volumes:
           - /home/sylvioneto/Downloads/cursos/devops_jenkins/jenkins_home:/var/jenkins_home
         ports:
@@ -23,11 +22,10 @@
       docker_container:
         name: mytomcat
         image: "tomcat:7-jdk8"
-        recreate: yes
         ports:
           - "8080:8080"
         networks:
           - name: "devops_network"
 
-    - name: Copy tomcat user configuration
+    - name: Copy tomcat-user.xml
       shell: 'docker cp ./config/tomcat-users.xml mytomcat:/usr/local/tomcat/conf/tomcat-users.xml && docker restart mytomcat'
