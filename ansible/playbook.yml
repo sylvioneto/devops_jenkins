@@ -11,7 +11,7 @@
         name: myjenkins
         image: "jenkins/jenkins:lts"
         volumes:
-          - /tmp/devops/jenkins_home:/var/jenkins_home
+          - /home/sylvioneto/Downloads/cursos/devops_jenkins/jenkins_home:/var/jenkins_home
         ports:
           - "8180:8080"
           - "51000:50000"
