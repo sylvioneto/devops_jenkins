@@ -1,0 +1,12 @@
+---
+- name: Create Tomcat container
+  docker_container:
+    name: mytomcat
+    image: "tomcat:7-jdk8"
+    ports:
+      - "8080:8080"
+    networks:
+      - name: devops_network
+
+- name: Copy tomcat-user.xml to tomcat-container
+  shell: 'docker cp ./config/tomcat-users.xml mytomcat:/usr/local/tomcat/conf/tomcat-users.xml && docker restart mytomcat'

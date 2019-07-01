@@ -1,31 +1,12 @@
 ---
 - hosts: 127.0.0.1
   connection: local
+  
   tasks:
     - name: Create devops network
       docker_network:
         name: devops_network
-
-    - name: Create Jenkins container
-      docker_container:
-        name: myjenkins
-        image: "jenkins/jenkins:lts"
-        volumes:
-          - /home/sylvioneto/Downloads/cursos/devops_jenkins/jenkins_home:/var/jenkins_home
-        ports:
-          - "8180:8080"
-          - "51000:50000"
-        networks:
-          - name: "devops_network"
-
-    - name: Create Tomcat container
-      docker_container:
-        name: mytomcat
-        image: "tomcat:7-jdk8"
-        ports:
-          - "8080:8080"
-        networks:
-          - name: "devops_network"
-
-    - name: Copy tomcat-user.xml
-      shell: 'docker cp ./config/tomcat-users.xml mytomcat:/usr/local/tomcat/conf/tomcat-users.xml && docker restart mytomcat'
+  
+  roles:
+    - jenkins-env
+    - tomcat-env
