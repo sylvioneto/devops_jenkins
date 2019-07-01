@@ -8,9 +8,18 @@
     name: myjenkins
     image: "jenkins/jenkins:lts"
     volumes:
-      - /home/sylvioneto/Downloads/cursos/devops_jenkins/jenkins_home:/var/jenkins_home
+      - /opt/jenkins_home:/var/jenkins_home
     ports:
       - "8180:8080"
       - "51000:50000"
+    networks:
+      - name: devops_network
+
+- name: Create SonarQube container
+  docker_container:
+    name: mysonar
+    image: "sonarqube:lts"
+    ports:
+      - "9000:9000"
     networks:
       - name: devops_network
